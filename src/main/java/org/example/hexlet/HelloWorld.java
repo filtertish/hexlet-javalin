@@ -15,11 +15,7 @@ public class HelloWorld {
             javalinConfig.fileRenderer(new JavalinJte());
         });
 
-        app.get("/", context -> context.result("""
-                Available routes:
-                /hello
-                /users/{id}/post/{id}
-                /courses/{id}"""));
+        app.get("/", context -> context.render("index.jte"));
 
         app.get("/hello", context -> {
             var name = context.queryParamAsClass("name", String.class).getOrDefault("World");
