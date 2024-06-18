@@ -7,6 +7,11 @@ show = @`
     @if(page.getCourses().isEmpty())
         <p>No courses yet</p>
     @else
+        <form action="/courses" method="get">
+            <label for="course-input">Course name</label>
+            <input type="text" required name="term" id="course-input" value="${page.getTerm()}">
+            <button>Enter</button>
+        </form>
         @for(var course : page.getCourses())
             <div><a href="/courses/${course.id()}"><h2>${course.name()}</h2></a></div>
             <p>${course.description()}</p>

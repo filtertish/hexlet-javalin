@@ -1,10 +1,11 @@
 package org.example.hexlet;
 
 import io.javalin.Javalin;
-import io.javalin.http.NotFoundResponse;
 import io.javalin.rendering.template.JavalinJte;
 import org.example.hexlet.dto.courses.CoursePage;
 import org.example.hexlet.model.Course;
+
+import java.util.List;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
@@ -30,8 +31,21 @@ public class HelloWorld {
 
         app.get("courses", ctx -> {
             var page = new CoursePage("Programming courses");
+            var term = ctx.queryParam("term");
+            List<Course> result = List.of();
 
-            ctx.render("courses/show.jte", model("page", page));
+            if (term == null) {
+                result = page.getCourses();
+            }
+
+            if (term != null) {
+                result = page.getCourses()
+                        .stream()
+                        .filter(course -> course.name().toLowerCase().contains(term.toLowerCase()))
+                        .toList();
+            }
+
+            ctx.render("courses/show.jte", model("page", new CoursePage(result, page.getHeader(), term)));
         });
 
         app.get("courses/{id}", ctx -> {

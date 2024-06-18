@@ -7,10 +7,12 @@ import java.util.List;
 public class CoursePage {
     private final List<Course> courses;
     private final String header;
+    private final String term;
 
-    public CoursePage(List<Course> course, String header) {
-        this.courses = course;
+    public CoursePage(List<Course> courses, String header, String term) {
+        this.courses = courses;
         this.header = header;
+        this.term = term;
     }
 
     public CoursePage(String header) {
@@ -20,6 +22,7 @@ public class CoursePage {
                 new Course(3, "Postgres", "Database")
         );
         this.header = header;
+        term = null;
     }
 
     public List<Course> getCourses() {
@@ -28,5 +31,9 @@ public class CoursePage {
 
     public String getHeader() {
         return header;
+    }
+
+    public String getTerm() {
+        return term;
     }
 }
