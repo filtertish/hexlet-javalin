@@ -13,6 +13,7 @@
 <header>
     <a href="/">main page</a>
     <a href="/courses">courses page</a>
+    <a href="/users">users page</a>
 </header>
 <main>
     ${show}

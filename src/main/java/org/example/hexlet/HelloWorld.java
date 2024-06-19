@@ -4,8 +4,10 @@ import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import org.example.hexlet.dto.courses.CoursePage;
 import org.example.hexlet.model.Course;
+import org.example.hexlet.repository.UsersRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
@@ -16,6 +18,8 @@ public class HelloWorld {
             javalinConfig.fileRenderer(new JavalinJte());
         });
 
+        var usersRepository = new UsersRepository();
+
         app.get("/", context -> context.render("index.jte"));
 
         app.get("/hello", context -> {
@@ -23,10 +27,32 @@ public class HelloWorld {
             context.result("Hello, " + name + "!");
         });
 
-        app.get("/users/{id}/post/{postId}", context -> {
-            var userId = context.pathParam("id");
-            var postId = context.pathParam("postId");
-            context.result(String.format("First param: %s\nSecond param: %s", userId, postId));
+        app.get("/users", context -> {
+            context.render("users/users.jte", model("usersRepository", usersRepository));
+        });
+
+        app.post("/users", context -> {
+            var username = context.formParam("username");
+            var email = context.formParam("email");
+            var password = context.formParam("password");
+            var passwordAgain = context.formParam("password-again");
+
+            if (username == null || email == null || password == null || passwordAgain == null) {
+                context.redirect("/users");
+                return;
+            }
+
+            if (!Objects.equals(password, passwordAgain)) {
+                context.redirect("/users");
+                return;
+            }
+
+            usersRepository.addUser(username, email, password);
+            context.redirect("/users");
+        });
+
+        app.get("users/build", context -> {
+            context.render("users/build.jte");
         });
 
         app.get("courses", ctx -> {
