@@ -1,3 +1,4 @@
+@import org.example.hexlet.NamedRoutes
 @import org.example.hexlet.dto.users.UserDto
 @import org.example.hexlet.dto.users.ErrorData
 
@@ -12,9 +13,9 @@
 </head>
 <body>
 <header>
-    <a href="/users">users</a>
+    <a href="${NamedRoutes.usersRoute()}">users</a>
 </header>
-<form action="/users" method="post">
+<form action="${NamedRoutes.usersRoute()}" method="post">
     <label>
         Username:
         @if(user != null)

@@ -1,3 +1,4 @@
+@import org.example.hexlet.NamedRoutes
 @import org.example.hexlet.dto.courses.CoursePage
 @param CoursePage page
 
@@ -7,7 +8,7 @@ show = @`
     @if(page.getCourses().isEmpty())
         <p>No courses yet</p>
     @else
-        <form action="/courses" method="get">
+        <form action="${NamedRoutes.coursesRoot()}" method="get">
             <label for="course-input">Course name</label>
             <input type="text" required name="term" id="course-input" value="${page.getTerm()}">
             <button>Enter</button>

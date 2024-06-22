@@ -1,6 +1,5 @@
+@import org.example.hexlet.NamedRoutes
 @import org.example.hexlet.repository.UsersRepository
-
-@param UsersRepository usersRepository
 
 <!doctype html>
 <html lang="en">
@@ -11,12 +10,12 @@
 <body>
 <header>
     <a href="/">main</a>
-    <a href="/users/build">add user</a>
+    <a href="${NamedRoutes.buildUsersRoot()}">add user</a>
 </header>
-@if(usersRepository.getUsers().isEmpty())
+@if(UsersRepository.getUsers().isEmpty())
     <p>No users found</p>
 @else
-    @for(var user : usersRepository.getUsers())
+    @for(var user : UsersRepository.getUsers())
         <div style="border: 1px solid black">
             <p>${user.name()}</p>
             <p>${user.email()}</p>

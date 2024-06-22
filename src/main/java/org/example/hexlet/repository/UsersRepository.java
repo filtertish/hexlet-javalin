@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersRepository {
-    private final List<User> users = new ArrayList<>();
-    private long id = 1;
+    private static final List<User> users = new ArrayList<>();
+    private static long id = 1;
 
-    public List<User> getUsers() {
+    public static List<User> getUsers() {
         return users;
     }
 
-    public void addUser(String username, String email, String password) {
+    public static void addUser(String username, String email, String password) {
         users.add(new User(id, username, email, password));
         id += 1;
     }

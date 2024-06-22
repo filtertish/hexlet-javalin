@@ -1,10 +1,29 @@
 package gg.jte.generated.ondemand.layout;
 import gg.jte.Content;
+import org.example.hexlet.NamedRoutes;
 public final class JtepageGenerated {
 	public static final String JTE_NAME = "layout/page.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,2,2,2,18,18,18,18,19,19,19,25,25,25,2,3,3,3,3};
+	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,15,15,15,15,15,15,15,15,15,15,16,16,16,16,16,16,16,16,16,19,19,19,20,20,20,26,26,26,3,4,4,4,4};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content show, Content index) {
-		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>My site</title>\n</head>\n<body>\n<header>\n    <a href=\"/\">main page</a>\n    <a href=\"/courses\">courses page</a>\n    <a href=\"/users\">users page</a>\n</header>\n<main>\n    ");
+		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>My site</title>\n</head>\n<body>\n<header>\n    <a href=\"/\">main page</a>\n    <a");
+		var __jte_html_attribute_0 = NamedRoutes.coursesRoot();
+		if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
+			jteOutput.writeContent(" href=\"");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(__jte_html_attribute_0);
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\"");
+		}
+		jteOutput.writeContent(">courses page</a>\n    <a");
+		var __jte_html_attribute_1 = NamedRoutes.usersRoute();
+		if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_1)) {
+			jteOutput.writeContent(" href=\"");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(__jte_html_attribute_1);
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\"");
+		}
+		jteOutput.writeContent(">users page</a>\n</header>\n<main>\n    ");
 		jteOutput.setContext("main", null);
 		jteOutput.writeUserContent(show);
 		jteOutput.writeContent("\n    ");

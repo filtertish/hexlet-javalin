@@ -1,8 +1,9 @@
 package gg.jte.generated.ondemand.courses;
+import org.example.hexlet.NamedRoutes;
 import org.example.hexlet.dto.courses.CoursePage;
 public final class JteshowGenerated {
 	public static final String JTE_NAME = "courses/show.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,1,1,3,3,5,5,6,6,6,7,7,9,9,12,12,12,12,12,12,12,12,12,15,15,16,16,16,16,16,16,16,17,17,17,18,18,19,19,20,20,20,20,20,1,1,1,1};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,2,2,4,4,6,6,7,7,7,8,8,10,10,11,11,11,11,11,11,11,11,11,13,13,13,13,13,13,13,13,13,16,16,17,17,17,17,17,17,17,18,18,18,19,19,20,20,21,21,21,21,21,2,2,2,2};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, CoursePage page) {
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
@@ -14,12 +15,21 @@ public final class JteshowGenerated {
 				if (page.getCourses().isEmpty()) {
 					jteOutput.writeContent("\n        <p>No courses yet</p>\n    ");
 				} else {
-					jteOutput.writeContent("\n        <form action=\"/courses\" method=\"get\">\n            <label for=\"course-input\">Course name</label>\n            <input type=\"text\" required name=\"term\" id=\"course-input\"");
-					var __jte_html_attribute_0 = page.getTerm();
+					jteOutput.writeContent("\n        <form");
+					var __jte_html_attribute_0 = NamedRoutes.coursesRoot();
 					if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
+						jteOutput.writeContent(" action=\"");
+						jteOutput.setContext("form", "action");
+						jteOutput.writeUserContent(__jte_html_attribute_0);
+						jteOutput.setContext("form", null);
+						jteOutput.writeContent("\"");
+					}
+					jteOutput.writeContent(" method=\"get\">\n            <label for=\"course-input\">Course name</label>\n            <input type=\"text\" required name=\"term\" id=\"course-input\"");
+					var __jte_html_attribute_1 = page.getTerm();
+					if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_1)) {
 						jteOutput.writeContent(" value=\"");
 						jteOutput.setContext("input", "value");
-						jteOutput.writeUserContent(__jte_html_attribute_0);
+						jteOutput.writeUserContent(__jte_html_attribute_1);
 						jteOutput.setContext("input", null);
 						jteOutput.writeContent("\"");
 					}

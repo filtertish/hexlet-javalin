@@ -1,18 +1,37 @@
 package gg.jte.generated.ondemand.users;
+import org.example.hexlet.NamedRoutes;
 import org.example.hexlet.dto.users.UserDto;
 import org.example.hexlet.dto.users.ErrorData;
 public final class JtebuildGenerated {
 	public static final String JTE_NAME = "users/build.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,19,19,19,20,20,20,20,20,20,20,20,20,21,21,23,23,27,27,28,28,28,28,28,28,28,28,28,29,29,31,31,42,42,43,43,44,44,45,45,45,46,46,47,47,48,48,51,51,51,3,4,4,4,4};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,15,15,15,15,15,15,15,15,15,15,17,17,17,17,17,17,17,17,17,20,20,21,21,21,21,21,21,21,21,21,22,22,24,24,28,28,29,29,29,29,29,29,29,29,29,30,30,32,32,43,43,44,44,45,45,46,46,46,47,47,48,48,49,49,52,52,52,4,5,5,5,5};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, UserDto user, ErrorData errorsDTO) {
-		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Add user</title>\n</head>\n<body>\n<header>\n    <a href=\"/users\">users</a>\n</header>\n<form action=\"/users\" method=\"post\">\n    <label>\n        Username:\n        ");
+		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Add user</title>\n</head>\n<body>\n<header>\n    <a");
+		var __jte_html_attribute_0 = NamedRoutes.usersRoute();
+		if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
+			jteOutput.writeContent(" href=\"");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(__jte_html_attribute_0);
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\"");
+		}
+		jteOutput.writeContent(">users</a>\n</header>\n<form");
+		var __jte_html_attribute_1 = NamedRoutes.usersRoute();
+		if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_1)) {
+			jteOutput.writeContent(" action=\"");
+			jteOutput.setContext("form", "action");
+			jteOutput.writeUserContent(__jte_html_attribute_1);
+			jteOutput.setContext("form", null);
+			jteOutput.writeContent("\"");
+		}
+		jteOutput.writeContent(" method=\"post\">\n    <label>\n        Username:\n        ");
 		if (user != null) {
 			jteOutput.writeContent("\n            <input type=\"text\" name=\"username\"");
-			var __jte_html_attribute_0 = user.username();
-			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
+			var __jte_html_attribute_2 = user.username();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_2)) {
 				jteOutput.writeContent(" value=\"");
 				jteOutput.setContext("input", "value");
-				jteOutput.writeUserContent(__jte_html_attribute_0);
+				jteOutput.writeUserContent(__jte_html_attribute_2);
 				jteOutput.setContext("input", null);
 				jteOutput.writeContent("\"");
 			}
@@ -23,11 +42,11 @@ public final class JtebuildGenerated {
 		jteOutput.writeContent("\n    </label>\n    <label>\n        Email:\n        ");
 		if (user != null) {
 			jteOutput.writeContent("\n            <input type=\"text\" name=\"email\"");
-			var __jte_html_attribute_1 = user.email();
-			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_1)) {
+			var __jte_html_attribute_3 = user.email();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_3)) {
 				jteOutput.writeContent(" value=\"");
 				jteOutput.setContext("input", "value");
-				jteOutput.writeUserContent(__jte_html_attribute_1);
+				jteOutput.writeUserContent(__jte_html_attribute_3);
 				jteOutput.setContext("input", null);
 				jteOutput.writeContent("\"");
 			}
