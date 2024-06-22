@@ -3,9 +3,12 @@ package org.example.hexlet;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import org.example.hexlet.dto.courses.CoursePage;
+import org.example.hexlet.dto.users.ErrorData;
+import org.example.hexlet.dto.users.UserDto;
 import org.example.hexlet.model.Course;
 import org.example.hexlet.repository.UsersRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +26,7 @@ public class HelloWorld {
         app.get("/", context -> context.render("index.jte"));
 
         app.get("/hello", context -> {
-            var name = context.queryParamAsClass("name", String.class).getOrDefault("World");
+            var name = context.queryParamAsClass("username", String.class).getOrDefault("World");
             context.result("Hello, " + name + "!");
         });
 
@@ -37,18 +40,25 @@ public class HelloWorld {
             var password = context.formParam("password");
             var passwordAgain = context.formParam("password-again");
 
-            if (username == null || email == null || password == null || passwordAgain == null) {
+            var errorData = new ErrorData(new ArrayList<>());
+
+            if (username == null || username.isBlank()) errorData.errors().add("username field must not be empty");
+
+            if (email == null || email.isBlank()) errorData.errors().add("email field must not be empty");
+
+            if (password == null || passwordAgain == null) errorData.errors().add("password fields must not be empty");
+
+            if (!Objects.equals(password, passwordAgain))
+                errorData.errors().add("password and password confirmation isn't the same");
+
+            if (errorData.errors().isEmpty()) {
+                usersRepository.addUser(username, email, password);
                 context.redirect("/users");
                 return;
             }
 
-            if (!Objects.equals(password, passwordAgain)) {
-                context.redirect("/users");
-                return;
-            }
-
-            usersRepository.addUser(username, email, password);
-            context.redirect("/users");
+            var user = new UserDto(username, email);
+            context.render("users/build.jte", model("user", user, "errorsDTO", errorData));
         });
 
         app.get("users/build", context -> {

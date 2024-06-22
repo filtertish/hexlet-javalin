@@ -1,6 +1,6 @@
 package org.example.hexlet.repository;
 
-import org.example.hexlet.User;
+import org.example.hexlet.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

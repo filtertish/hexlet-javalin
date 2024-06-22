@@ -6,7 +6,7 @@ public record Course(long id, String name, String description) {
     public String toString() {
         return "Course{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
