@@ -25,16 +25,16 @@ public class HelloWorld {
 
         app.get("/", context -> context.render("index.jte"));
 
-        app.get("/hello", context -> {
+        app.get(NamedRoutes.helloRoute(), context -> {
             var name = context.queryParamAsClass("username", String.class).getOrDefault("World");
             context.result("Hello, " + name + "!");
         });
 
-        app.get("/users", context -> {
+        app.get(NamedRoutes.usersRoute(), context -> {
             context.render("users/users.jte", model("usersRepository", usersRepository));
         });
 
-        app.post("/users", context -> {
+        app.post(NamedRoutes.usersRoute(), context -> {
             var username = context.formParam("username");
             var email = context.formParam("email");
             var password = context.formParam("password");
@@ -53,7 +53,7 @@ public class HelloWorld {
 
             if (errorData.errors().isEmpty()) {
                 usersRepository.addUser(username, email, password);
-                context.redirect("/users");
+                context.redirect(NamedRoutes.usersRoute());
                 return;
             }
 
@@ -61,11 +61,11 @@ public class HelloWorld {
             context.render("users/build.jte", model("user", user, "errorsDTO", errorData));
         });
 
-        app.get("users/build", context -> {
+        app.get(NamedRoutes.buildUsersRoot(), context -> {
             context.render("users/build.jte");
         });
 
-        app.get("courses", ctx -> {
+        app.get(NamedRoutes.coursesRoot(), ctx -> {
             var page = new CoursePage("Programming courses");
             var term = ctx.queryParam("term");
             List<Course> result = List.of();
