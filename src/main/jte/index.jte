@@ -1,10 +1,14 @@
 @import org.example.hexlet.model.Course
 @param Course course
 @param Long id
+@param Boolean visited
 
 @template.layout.page(
 index = @`
     <div>
+        @if(!visited)
+            <h1><span style="color: #FF00FF">Cookie</span> message - will be shown only once</h1>
+        @endif
         <main>
             @if(course != null)
                 <h1>${course.name()}</h1>

@@ -2,12 +2,16 @@ package gg.jte.generated.ondemand;
 import org.example.hexlet.model.Course;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,1,1,4,4,6,6,9,9,10,10,10,11,11,11,12,12,13,13,13,14,14,16,16,19,19,19,19,19,1,2,2,2,2};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Course course, Long id) {
+	public static final int[] JTE_LINE_INFO = {0,0,1,1,1,5,5,7,7,9,9,11,11,13,13,14,14,14,15,15,15,16,16,17,17,17,18,18,20,20,23,23,23,23,23,1,2,3,3,3,3};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Course course, Long id, Boolean visited) {
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, null, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\n    <div>\n        <main>\n            ");
+				jteOutput.writeContent("\n    <div>\n        ");
+				if (!visited) {
+					jteOutput.writeContent("\n            <h1><span style=\"color: #FF00FF\">Cookie</span> message - will be shown only once</h1>\n        ");
+				}
+				jteOutput.writeContent("\n        <main>\n            ");
 				if (course != null) {
 					jteOutput.writeContent("\n                <h1>");
 					jteOutput.setContext("h1", null);
@@ -31,6 +35,7 @@ public final class JteindexGenerated {
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		Course course = (Course)params.get("course");
 		Long id = (Long)params.get("id");
-		render(jteOutput, jteHtmlInterceptor, course, id);
+		Boolean visited = (Boolean)params.get("visited");
+		render(jteOutput, jteHtmlInterceptor, course, id, visited);
 	}
 }

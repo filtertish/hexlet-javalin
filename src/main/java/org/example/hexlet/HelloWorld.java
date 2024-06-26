@@ -16,7 +16,11 @@ public class HelloWorld {
             javalinConfig.fileRenderer(new JavalinJte());
         });
 
-        app.get("/", context -> context.render("index.jte"));
+        app.get("/", context -> {
+            var visited = Boolean.valueOf(context.cookie("visited"));
+            context.render("index.jte", model("visited", visited));
+            context.cookie("visited", String.valueOf(true));
+        });
 
         app.get(NamedRoutes.helloRoute(), context -> {
             var name = context.queryParamAsClass("username", String.class).getOrDefault("World");
