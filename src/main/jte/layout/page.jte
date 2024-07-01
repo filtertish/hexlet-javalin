@@ -3,6 +3,7 @@
 
 @param Content show = null
 @param Content index = null
+@param String authorized = null
 
 <!doctype html>
 <html lang="en">
@@ -15,6 +16,11 @@
     <a href="/">main page</a>
     <a href="${NamedRoutes.coursesRoot()}">courses page</a>
     <a href="${NamedRoutes.usersRoute()}">users page</a>
+    @if(authorized == null)
+        <a href="${NamedRoutes.buildSessionsRoot()}">login</a>
+    @else
+        <p>authorized as: ${authorized}</p>
+    @endif
 </header>
 <main>
     ${show}

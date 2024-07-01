@@ -2,6 +2,7 @@
 @param Course course
 @param Long id
 @param Boolean visited
+@param String authorized
 
 @template.layout.page(
 index = @`
@@ -20,5 +21,6 @@ index = @`
             @endif
         </main>
     </div>
-`
+`,
+    authorized = authorized
 )

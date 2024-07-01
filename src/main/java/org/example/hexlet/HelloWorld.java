@@ -18,7 +18,9 @@ public class HelloWorld {
 
         app.get("/", context -> {
             var visited = Boolean.valueOf(context.cookie("visited"));
-            context.render("index.jte", model("visited", visited));
+            var authorized = context.sessionAttribute("currentUser");
+
+            context.render("index.jte", model("visited", visited, "authorized", authorized));
             context.cookie("visited", String.valueOf(true));
         });
 
@@ -66,6 +68,9 @@ public class HelloWorld {
 
             ctx.render("index.jte", model("course", course, "id", id));
         });
+
+        app.get(NamedRoutes.buildSessionsRoot(), SessionsController::build);
+        app.post(NamedRoutes.sessionsRoot(), SessionsController::create);
 
         app.start(7070);
     }

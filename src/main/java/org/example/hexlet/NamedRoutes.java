@@ -17,7 +17,11 @@ public class NamedRoutes {
         return "/courses";
     }
 
-    public static String coursesRoot(Long id) {
-        return "/courses/" + id;
+    public static String sessionsRoot() {
+        return "/sessions";
+    }
+
+    public static String buildSessionsRoot() {
+        return "/sessions/build";
     }
 }
