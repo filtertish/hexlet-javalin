@@ -8,7 +8,7 @@ public final class JteindexGenerated {
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, null, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
 				jteOutput.writeContent("\n    <div>\n        ");
-				if (!visited) {
+				if (visited != null && !visited) {
 					jteOutput.writeContent("\n            <h1><span style=\"color: #FF00FF\">Cookie</span> message - will be shown only once</h1>\n        ");
 				}
 				jteOutput.writeContent("\n        <main>\n            ");
@@ -35,7 +35,7 @@ public final class JteindexGenerated {
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		Course course = (Course)params.get("course");
 		Long id = (Long)params.get("id");
-		Boolean visited = (Boolean)params.get("visited");
+		Boolean visited = (Boolean)params.getOrDefault("visited", null);
 		String authorized = (String)params.get("authorized");
 		render(jteOutput, jteHtmlInterceptor, course, id, visited, authorized);
 	}

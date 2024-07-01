@@ -36,6 +36,8 @@ public class HelloWorld {
         app.get(NamedRoutes.buildUsersRoot(), UsersController::build);
 
         app.get(NamedRoutes.coursesRoot(), ctx -> {
+            var flash = ctx.consumeSessionAttribute("flash");
+
             var page = new CoursePage("Programming courses");
             var term = ctx.queryParam("term");
             List<Course> result = List.of();
@@ -51,7 +53,13 @@ public class HelloWorld {
                         .toList();
             }
 
-            ctx.render("courses/show.jte", model("page", new CoursePage(result, page.getHeader(), term)));
+            ctx.render("courses/show.jte", model("page", new CoursePage(result, page.getHeader(), term),
+                    "flash", flash != null));
+        });
+
+        app.post(NamedRoutes.coursesRoot(), ctx -> {
+            ctx.sessionAttribute("flash", "Course hasn't been created :)");
+            ctx.redirect(NamedRoutes.coursesRoot());
         });
 
         app.get("courses/{id}", ctx -> {

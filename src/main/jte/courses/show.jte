@@ -1,9 +1,13 @@
 @import org.example.hexlet.NamedRoutes
 @import org.example.hexlet.dto.courses.CoursePage
 @param CoursePage page
+@param Boolean flash
 
 @template.layout.page(
 show = @`
+    @if(flash)
+        <h1 style="color: #FF00FF">I am a flash message</h1>
+    @endif
     <h1>${page.getHeader()}</h1>
     @if(page.getCourses().isEmpty())
         <p>No courses yet</p>
@@ -18,5 +22,9 @@ show = @`
             <p>${course.description()}</p>
         @endfor
     @endif
+    <form action="${NamedRoutes.coursesRoot()}" method="post">
+        <button>Test flash message</button>
+    </form>
+    <br>
 `
 )

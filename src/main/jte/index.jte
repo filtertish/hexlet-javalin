@@ -1,13 +1,13 @@
 @import org.example.hexlet.model.Course
 @param Course course
 @param Long id
-@param Boolean visited
+@param Boolean visited = null
 @param String authorized
 
 @template.layout.page(
 index = @`
     <div>
-        @if(!visited)
+        @if(visited != null && !visited)
             <h1><span style="color: #FF00FF">Cookie</span> message - will be shown only once</h1>
         @endif
         <main>
