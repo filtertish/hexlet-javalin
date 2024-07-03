@@ -24,4 +24,20 @@ public class NamedRoutes {
     public static String buildSessionsRoot() {
         return "/sessions/build";
     }
+
+    public static String carsRoot() {
+        return "/cars";
+    }
+
+    public static String showCarsRoot(Long id) {
+        return "/cars/" + id;
+    }
+
+    public static String showCarsRoot(String id) {
+        return "/cars/" + id;
+    }
+
+    public static String buildCarsRoot() {
+        return "/cars/build";
+    }
 }

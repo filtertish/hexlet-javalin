@@ -1,16 +1,39 @@
 package org.example.hexlet;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import org.example.hexlet.dto.courses.CoursePage;
 import org.example.hexlet.model.Course;
+import org.example.hexlet.repository.BaseRepository;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
 public class HelloWorld {
     public static void main(String[] args) {
+        var hikariConfig = new HikariConfig();
+        hikariConfig.setJdbcUrl("jdbc:h2:mem:hexlet_project;DB_CLOSE_DELAY=-1;");
+        var dataSource = new HikariDataSource(hikariConfig);
+
+        var url = HelloWorld.class.getClassLoader().getResourceAsStream("schema.sql");
+        var sql = new BufferedReader(new InputStreamReader(url))
+                .lines().collect(Collectors.joining("\n"));
+
+        try (var connection = dataSource.getConnection(); var statement = connection.createStatement()) {
+            statement.execute(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        BaseRepository.dataSource = dataSource;
+
         var app = Javalin.create(javalinConfig -> {
             javalinConfig.bundledPlugins.enableDevLogging();
             javalinConfig.fileRenderer(new JavalinJte());
@@ -79,6 +102,11 @@ public class HelloWorld {
 
         app.get(NamedRoutes.buildSessionsRoot(), SessionsController::build);
         app.post(NamedRoutes.sessionsRoot(), SessionsController::create);
+
+        app.get(NamedRoutes.carsRoot(), CarController::index);
+        app.get(NamedRoutes.buildCarsRoot(), CarController::build);
+        app.get(NamedRoutes.showCarsRoot("{id}"), CarController::show);
+        app.post(NamedRoutes.carsRoot(), CarController::create);
 
         app.start(7070);
     }
